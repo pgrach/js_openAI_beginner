@@ -20,7 +20,6 @@ export default async function handler(req, res) {
         });
 
         if (!response.ok) {
-            // Log the response status and text for debugging
             const text = await response.text();
             console.error(`OpenAI API responded with ${response.status}: ${text}`);
             throw new Error(`OpenAI API responded with ${response.status}`);
@@ -28,10 +27,9 @@ export default async function handler(req, res) {
 
         const data = await response.json();
 
-        // Send the assistant's response back to the client
         res.json({response: data.choices[0].message.content});
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message});
+        res.status(500).json({error: error.toString()});
     }
 };
