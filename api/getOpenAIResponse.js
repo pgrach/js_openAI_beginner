@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export default async function handler(req, res) {
     const { userInput } = req.body;
 
@@ -28,9 +26,9 @@ export default async function handler(req, res) {
         const data = await response.json();
         console.log('Data from OpenAI API:', data);
 
-        res.json({response: data.choices[0].message.content});
+        res.json({ response: data.choices[0].message.content });
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.toString()});
+        res.status(500).json({ error: error.toString() });
     }
 };
